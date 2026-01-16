@@ -9,61 +9,71 @@
         "day": 1,
         "title": "Set Your Sleep Schedule",
         "description": "Choose a consistent bedtime and wake time, even on weekends.",
-        "icon": "⏰"
+        "icon": "⏰",
+        "fbUrl": "https://www.facebook.com/groups/example/permalink/day1/"
       },
       {
         "day": 2,
         "title": "Create a Wind-Down Routine",
         "description": "Develop a 30-minute pre-sleep routine to signal your body it's time to rest.",
-        "icon": "🌙"
+        "icon": "🌙",
+        "fbUrl": "https://www.facebook.com/groups/example/permalink/day2/"
       },
       {
         "day": 3,
         "title": "Optimize Your Environment",
         "description": "Make your bedroom cool, dark, and quiet for optimal sleep conditions.",
-        "icon": "🛏️"
+        "icon": "🛏️",
+        "fbUrl": "https://www.facebook.com/groups/example/permalink/day3/"
       },
       {
         "day": 4,
         "title": "Digital Detox",
         "description": "No screens 1 hour before bed. Try reading or meditation instead.",
-        "icon": "📵"
+        "icon": "📵",
+        "fbUrl": "https://www.facebook.com/groups/example/permalink/day4/"
       },
       {
         "day": 5,
         "title": "Morning Light Exposure",
         "description": "Get 10-15 minutes of natural sunlight within an hour of waking.",
-        "icon": "☀️"
+        "icon": "☀️",
+        "fbUrl": "https://www.facebook.com/groups/example/permalink/day5/"
       },
       {
         "day": 6,
         "title": "Afternoon Energy Boost",
         "description": "No caffeine after 2 PM. Switch to herbal tea or water.",
-        "icon": "☕"
+        "icon": "☕",
+        "fbUrl": "https://www.facebook.com/groups/example/permalink/day6/"
       },
       {
         "day": 7,
         "title": "Evening Exercise",
         "description": "Light stretching or yoga 2-3 hours before bed to release tension.",
-        "icon": "🧘"
+        "icon": "🧘",
+        "fbUrl": "https://www.facebook.com/groups/example/permalink/day7/"
       },
       {
         "day": 8,
         "title": "Mindful Eating",
         "description": "Avoid heavy meals 3 hours before bed. Light snacks only if needed.",
-        "icon": "🥗"
+        "icon": "🥗",
+        "fbUrl": "https://www.facebook.com/groups/example/permalink/day8/"
       },
       {
         "day": 9,
         "title": "Stress Management",
         "description": "Practice 10 minutes of deep breathing or journaling before bed.",
-        "icon": "📝"
+        "icon": "📝",
+        "fbUrl": "https://www.facebook.com/groups/example/permalink/day9/"
       },
       {
         "day": 10,
         "title": "Celebrate Your Progress",
         "description": "Reflect on your sleep improvements and commit to maintaining healthy habits.",
-        "icon": "🎉"
+        "icon": "🎉",
+        "fbUrl": "https://www.facebook.com/groups/example/permalink/day10/"
       }
     ]
   }
