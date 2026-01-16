@@ -703,7 +703,8 @@
                                         <span class="bg-green-600 text-xs px-2 py-1 rounded">Day ${day.day}</span>
                                     </div>
                                     <h4 class="text-lg font-bold mb-2">${day.title}</h4>
-                                    <p class="text-sm text-gray-300">${day.description}</p>
+                                    <p class="text-sm text-gray-300 mb-2">${day.description}</p>
+                                    ${day.fbUrl ? `<a href="${day.fbUrl}" target="_blank" class="text-xs text-blue-400 hover:text-blue-300 break-all">📎 Video Link</a>` : '<span class="text-xs text-gray-500">No video URL</span>'}
                                 </div>
                             `).join('')}
                         </div>
@@ -759,7 +760,7 @@
         }
 
         function addChallengeDay() {
-            addChallengeDayWithData({ day: challengeDayCounter + 1, title: '', description: '', icon: '⭐' });
+            addChallengeDayWithData({ day: challengeDayCounter + 1, title: '', description: '', icon: '⭐', fbUrl: '' });
         }
 
         function addChallengeDayWithData(dayData) {
@@ -802,6 +803,12 @@
                         rows="2"
                         class="challengeDayDesc bg-white/10 border border-white/20 rounded px-3 py-2 text-sm focus:outline-none focus:border-green-500"
                     >${dayData.description}</textarea>
+                    <input
+                        type="url"
+                        placeholder="Facebook Video URL"
+                        value="${dayData.fbUrl || ''}"
+                        class="challengeDayFbUrl bg-white/10 border border-white/20 rounded px-3 py-2 text-sm focus:outline-none focus:border-green-500"
+                    />
                 </div>
             `;
             container.appendChild(dayDiv);
@@ -830,12 +837,14 @@
                 const dayTitle = dayDiv.querySelector('.challengeDayTitle').value;
                 const dayDesc = dayDiv.querySelector('.challengeDayDesc').value;
                 const dayIcon = dayDiv.querySelector('.challengeDayIcon').value;
+                const dayFbUrl = dayDiv.querySelector('.challengeDayFbUrl').value;
 
                 days.push({
                     day: parseInt(dayNum),
                     title: dayTitle,
                     description: dayDesc,
-                    icon: dayIcon
+                    icon: dayIcon,
+                    fbUrl: dayFbUrl
                 });
             });
 
