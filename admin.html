@@ -518,9 +518,13 @@
             const courseId = document.getElementById('courseId').value;
             const course = {
                 title: document.getElementById('courseTitle').value,
-                description: document.getElementById('courseDescription').value,
-                lessons: []
+                description: document.getElementById('courseDescription').value
             };
+
+            // When creating a new course, include empty lessons array
+            if (!courseId) {
+                course.lessons = [];
+            }
 
             const endpoint = courseId ? '/api/admin/courses/update' : '/api/admin/courses/create';
             const body = courseId

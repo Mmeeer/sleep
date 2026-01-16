@@ -183,9 +183,14 @@ app.post('/api/admin/courses/update', (req, res) => {
       return res.status(404).json({ error: 'Course not found' });
     }
 
+    // Preserve existing lessons when updating course details
+    const existingLessons = data.courses[courseIndex].lessons || [];
+
     data.courses[courseIndex] = {
       ...data.courses[courseIndex],
-      ...course,
+      title: course.title,
+      description: course.description,
+      lessons: existingLessons, // Always preserve existing lessons
       id: courseId // Preserve the original ID
     };
 
