@@ -115,12 +115,15 @@
                             Нойрны боол биш, <span class="gradient-text">нойрны эзэн бай.</span>
                         </h1>
                         <p class="text-xl text-gray-300">
-                            Хэрвээ орой утасаа оролдож орондоо хөрвөөдөг, хагас цаг унтах гэж хөрвөөдөг, өдрийн цагаар ядардаг, яг одоо нойроо кодлоорой.
+                            Хүний биеийг компьютер гэж үзвэл тархи Процессор юм. Харин таны тархи яг одоо хэрэггүй файлуудаа устгаж чадаагүйгээс болж багтаамж нь дүүрч цоо шинэ вирус үүсгэж байна. үүнээс болж нойргүйдэл эхэлж байна. Цаашид үйлдлийн системийг сайжруулж хэрэггүй файлуудыг тогтмол устгаж цэвэрлэгээ хийснээр дахиж ийм асуудал үүсэхгүй.
+                        </p>
+                        <p class="text-xl text-gray-300">
+                            Иймд та бидний зааврыг бүрэн дагавал хамгийн ихдээ 12 хоног дунджаар 6 хоногийн дотор нойрыг бүрэн удирдах болно. 
                         </p>
                         <div class="flex flex-col sm:flex-row gap-4">
                             <button onclick="document.getElementById('courses').scrollIntoView({behavior: 'smooth'})"
                                     class="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 px-8 py-4 rounded-lg font-semibold text-lg transition transform hover:scale-105">
-                                Хичээл үзэх
+                                Ойлголт авах 
                             </button>
                             <button onclick="document.getElementById('challenge').scrollIntoView({behavior: 'smooth'})"
                                     class="glass px-8 py-4 rounded-lg font-semibold text-lg transition hover:bg-white/10">
@@ -151,10 +154,10 @@
             <div class="container mx-auto">
                 <div class="text-center mb-16">
                     <h2 class="text-4xl md:text-5xl font-bold mb-4">
-                        Your Journey to <span class="gradient-text">Better Sleep</span>
+                        Нойргүйдлийг зогсоох аялалд тань  <span class="gradient-text">Амжилт Хүсье</span>
                     </h2>
                     <p class="text-xl text-gray-300">
-                        Structured courses designed to transform your sleep, one lesson at a time
+                        Та нойроо кодлохоос урьтан доорх ойлголтуудыг авч өөрийн нойргүйдлийн шалтгааныг олж нүүр тулсан байх ёстой юм
                     </p>
                 </div>
 
@@ -174,10 +177,10 @@
             <div class="container mx-auto">
                 <div class="text-center mb-16">
                     <h2 class="text-4xl md:text-5xl font-bold mb-4">
-                        🎯 Take the <span class="gradient-text">Sleep Challenge</span>
+                        <span class="gradient-text">Нойрыг кодлох</span> цаг эхэлж байна
                     </h2>
                     <p class="text-xl text-gray-300">
-                        Transform your sleep habits with our structured daily challenge
+                        Заавар бичлэгийг сайтар үзсэн гэж найдаж байна
                     </p>
                 </div>
 
@@ -195,13 +198,26 @@
         <!-- Promotional Section -->
         <section id="benefits" class="py-20 px-6">
             <div class="container mx-auto">
-                <div class="text-center mb-16">
-                    <h2 class="text-4xl md:text-5xl font-bold mb-4">
-                        Яагаад <span class="gradient-text">Нойрны Код</span>-г сонгох вэ?
-                    </h2>
-                    <p class="text-xl text-gray-300">
-                        Таны амьдралд эерэг өөрчлөлт авчрах манай хөтөлбөрийн онцлог давуу талууд
-                    </p>
+                <!-- CTA Section -->
+                <div class="mt-16 text-center">
+                    <div class="glass p-8 md:p-12 rounded-3xl max-w-3xl mx-auto">
+                        <h3 class="text-3xl md:text-4xl font-bold mb-4">
+                            Нойрны чанараа <span class="gradient-text">өнөөдөр</span> сайжруулаарай
+                        </h3>
+                        <p class="text-xl text-gray-300 mb-8">
+                            Мянга мянган хүмүүс аль хэдийн амьдралаа өөрчилсөн. Таны ээлж ирлээ!
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                            <button onclick="document.getElementById('courses').scrollIntoView({behavior: 'smooth'})"
+                                    class="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 px-8 py-4 rounded-lg font-semibold text-lg transition transform hover:scale-105">
+                                Хичээл эхлүүлэх
+                            </button>
+                            <button onclick="document.getElementById('challenge').scrollIntoView({behavior: 'smooth'})"
+                                    class="glass px-8 py-4 rounded-lg font-semibold text-lg transition hover:bg-white/10">
+                                Үнэгүй туршилт
+                            </button>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Blog-style Promotional Cards -->
@@ -219,29 +235,44 @@
                             <!-- Content -->
                             <div class="p-8 md:p-12 flex flex-col justify-center">
                                 <h3 class="text-3xl md:text-4xl font-bold mb-4 gradient-text">
-                                    Шинжлэх ухаанд суурилсан контент
+                                    Нойргүйдэлтэй гэдгийг хэрхэн мэдэх вэ?
                                 </h3>
-                                <p class="text-gray-300 text-lg leading-relaxed mb-6">
-                                    Олон улсын судлагдсан аргууд, дэлхийн шилдэг мэргэжилтнүүдийн туршлага дээр суурилсан мэдлэг. Таны нойрны чанарыг сайжруулах практик арга, техникүүд.
-                                </p>
                                 <ul class="space-y-2 text-gray-400">
                                     <li class="flex items-center">
                                         <svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
                                             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                                         </svg>
-                                        Баталгаажсан судалгаа, мэдээлэл
+                                        Шөнө удаан хөрвөөн унтаж чаддаггүй.
                                     </li>
                                     <li class="flex items-center">
                                         <svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
                                             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                                         </svg>
-                                        Дэлхийн мэргэжилтнүүдийн зөвлөгөө
+                                        Стресс, түгшүүр ихтэй, толгой амрахгүй байгаа.
                                     </li>
                                     <li class="flex items-center">
                                         <svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
                                             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                                         </svg>
-                                        Шинэлэг, үр дүнтэй аргууд
+                                        Өглөө босоход хэцүү, өдрийн турш ядруу явдаг
+                                    </li>
+                                    <li class="flex items-center">
+                                        <svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                        </svg>
+                                        Ажил, сурлага, бүтээмжээ суларсан 
+                                    </li>
+                                    <li class="flex items-center">
+                                        <svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                        </svg>
+                                        Ирээдүйг тооцоолоход аз жаргалгүй мэт сөрөг санагддаг
+                                    </li>
+                                    <li class="flex items-center">
+                                        <svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                        </svg>
+                                        Нойрны эм болон мелатонин хэрэглэж үзсэн
                                     </li>
                                 </ul>
                             </div>
@@ -254,31 +285,17 @@
                             <!-- Content -->
                             <div class="p-8 md:p-12 flex flex-col justify-center order-2 md:order-1">
                                 <h3 class="text-3xl md:text-4xl font-bold mb-4 gradient-text">
-                                    Өөрийн цагаар суралцах боломж
+                                    Эмийн бус арга барил
                                 </h3>
                                 <p class="text-gray-300 text-lg leading-relaxed mb-6">
-                                    Хичээлүүдээ өөрийн тохиромжтой цагт, газраас үзэж, дахин давтан суралцах боломжтой. Амьдралынхаа хэв маягт тохируулан нойрны чанараа сайжруулаарай.
+                                    Тархи бол нойрыг хянадаг хэсэг юм. 
                                 </p>
-                                <ul class="space-y-2 text-gray-400">
-                                    <li class="flex items-center">
-                                        <svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                                        </svg>
-                                        24/7 хандах боломжтой
-                                    </li>
-                                    <li class="flex items-center">
-                                        <svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                                        </svg>
-                                        Ямар ч төхөөрөмж дээр үзэх
-                                    </li>
-                                    <li class="flex items-center">
-                                        <svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                                        </svg>
-                                        Давтан үзэх боломжтой
-                                    </li>
-                                </ul>
+                                <p class="text-gray-300 text-lg leading-relaxed mb-6">
+                                    Жингийн илүүдэлтэй бол эм ууж турах буруу харин дасгал хийх ёстой гэдгийг бүгд мэддэг ч нойргүйдэлтэй үед эм ууж унтах нь буруу гэдгийг үл ойшоодог. 
+                                </p>
+                                <p class="text-gray-300 text-lg leading-relaxed mb-6">
+                                    Таргалалттай хүн дасгал хийж биеийн жинг удирддаг шиг нойргүйдэлтэй хүн бодлоо цэгцэлж нойрыг удирдах ёстой
+                                </p>
                             </div>
                             <!-- Image -->
                             <div class="relative h-64 md:h-auto overflow-hidden order-1 md:order-2">
@@ -303,54 +320,20 @@
                             <!-- Content -->
                             <div class="p-8 md:p-12 flex flex-col justify-center">
                                 <h3 class="text-3xl md:text-4xl font-bold mb-4 gradient-text">
-                                    Идэвхтэй нийгэмлэг ба дэмжлэг
+                                    Нойргүйдлийг бүрэн зогсоогоогүй нь таны хамгийн том асуудал 
                                 </h3>
                                 <p class="text-gray-300 text-lg leading-relaxed mb-6">
-                                    Мянга мянган хүмүүстэй хамтран суралцах, туршлагаа хуваалцах боломж. Таны аялалд туслах дэмжлэг, урам зориг болон практик зөвлөгөөг авах боломжтой.
+                                    Улаанбаатар хотод амьдардаг 18-65 насныхан дунд Түүврийн судалгааны аргачлалаар нойргүйдлийн судалгаа явуулахад 38 гаруй хувь нь дунд болон хүнд хэлбэрийн нойргүйдэлтэй ба үүнээс 70 гаруй хувь нь нойргүйдэлтэйгээ тэмцдэг гэсэн үр дүн гарсан байна. 
                                 </p>
                                 <ul class="space-y-2 text-gray-400">
                                     <li class="flex items-center">
                                         <svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
                                             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                                         </svg>
-                                        Facebook бүлэгт нэгдэх
-                                    </li>
-                                    <li class="flex items-center">
-                                        <svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                                        </svg>
-                                        Туршлага хуваалцах
-                                    </li>
-                                    <li class="flex items-center">
-                                        <svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                                        </svg>
-                                        Урам зориг, дэмжлэг авах
+                                         “I think sleep is the most important thing in the world” (Erling Haaland)
                                     </li>
                                 </ul>
                             </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- CTA Section -->
-                <div class="mt-16 text-center">
-                    <div class="glass p-8 md:p-12 rounded-3xl max-w-3xl mx-auto">
-                        <h3 class="text-3xl md:text-4xl font-bold mb-4">
-                            Нойрны чанараа <span class="gradient-text">өнөөдөр</span> сайжруулаарай
-                        </h3>
-                        <p class="text-xl text-gray-300 mb-8">
-                            Мянга мянган хүмүүс аль хэдийн амьдралаа өөрчилсөн. Таны ээлж ирлээ!
-                        </p>
-                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                            <button onclick="document.getElementById('courses').scrollIntoView({behavior: 'smooth'})"
-                                    class="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 px-8 py-4 rounded-lg font-semibold text-lg transition transform hover:scale-105">
-                                Хичээл эхлүүлэх
-                            </button>
-                            <button onclick="document.getElementById('challenge').scrollIntoView({behavior: 'smooth'})"
-                                    class="glass px-8 py-4 rounded-lg font-semibold text-lg transition hover:bg-white/10">
-                                Үнэгүй туршилт
-                            </button>
                         </div>
                     </div>
                 </div>
