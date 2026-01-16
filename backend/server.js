@@ -11,10 +11,9 @@ const PORT = process.env.PORT || 3000;
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, '../public')));
 
 // Data file paths
-const DATA_DIR = path.join(__dirname, '../data');
+const DATA_DIR = path.join(__dirname, 'data');
 const COURSES_FILE = path.join(DATA_DIR, 'courses.json');
 
 // Ensure data directory exists
@@ -321,16 +320,6 @@ app.get('/api/lesson/:lessonId/redirect', (req, res) => {
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch lesson' });
   }
-});
-
-// Serve index.html for root
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/index.html'));
-});
-
-// Serve admin.html
-app.get('/admin', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/admin.html'));
 });
 
 // Start server
