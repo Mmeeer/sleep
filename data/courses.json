@@ -1,0 +1,58 @@
+{
+  "courses": [
+    {
+      "id": "1",
+      "title": "Sleep Fundamentals",
+      "description": "Master the basics of healthy sleep and understand the science behind better rest.",
+      "lessons": [
+        {
+          "id": "101",
+          "title": "Introduction to Sleep Science",
+          "description": "Learn about sleep cycles, REM sleep, and why quality sleep matters for your health.",
+          "duration": "15 min",
+          "fbUrl": "https://www.facebook.com/groups/example/permalink/123456/",
+          "order": 1
+        },
+        {
+          "id": "102",
+          "title": "Understanding Your Circadian Rhythm",
+          "description": "Discover how your body's internal clock affects your sleep patterns.",
+          "duration": "12 min",
+          "fbUrl": "https://www.facebook.com/groups/example/permalink/123457/",
+          "order": 2
+        },
+        {
+          "id": "103",
+          "title": "Common Sleep Disorders",
+          "description": "Identify and understand common sleep problems and when to seek help.",
+          "duration": "18 min",
+          "fbUrl": "https://www.facebook.com/groups/example/permalink/123458/",
+          "order": 3
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "title": "Sleep Optimization",
+      "description": "Advanced techniques to dramatically improve your sleep quality.",
+      "lessons": [
+        {
+          "id": "201",
+          "title": "Creating the Perfect Sleep Environment",
+          "description": "Optimize your bedroom for maximum sleep quality with temperature, lighting, and sound control.",
+          "duration": "20 min",
+          "fbUrl": "https://www.facebook.com/groups/example/permalink/123459/",
+          "order": 1
+        },
+        {
+          "id": "202",
+          "title": "Evening Routine Mastery",
+          "description": "Build a powerful wind-down routine that signals your body it's time to sleep.",
+          "duration": "16 min",
+          "fbUrl": "https://www.facebook.com/groups/example/permalink/123460/",
+          "order": 2
+        }
+      ]
+    }
+  ]
+}

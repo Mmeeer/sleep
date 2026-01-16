@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sleep Better - Master the Art of Quality Sleep</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Night sky background with stars */
+        body {
+            background: linear-gradient(to bottom, #0a0e27 0%, #1a1f3a 50%, #2d1b4e 100%);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animated stars */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .content {
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Glass morphism effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Lesson card hover effect */
+        .lesson-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .lesson-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+    </style>
+</head>
+<body class="text-white">
+    <!-- Stars Background -->
+    <div class="stars" id="stars"></div>
+
+    <!-- Content -->
+    <div class="content">
+        <!-- Header -->
+        <header class="fixed w-full top-0 z-50 glass">
+            <nav class="container mx-auto px-6 py-4">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-2">
+                        <span class="text-3xl">🌙</span>
+                        <span class="text-2xl font-bold gradient-text">SleepWell</span>
+                    </div>
+                    <div class="hidden md:flex space-x-8">
+                        <a href="#hero" class="hover:text-purple-400 transition">Home</a>
+                        <a href="#courses" class="hover:text-purple-400 transition">Courses</a>
+                        <a href="#benefits" class="hover:text-purple-400 transition">Benefits</a>
+                        <a href="/admin" class="hover:text-purple-400 transition">Admin</a>
+                    </div>
+                    <button class="md:hidden text-white">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Hero Section -->
+        <section id="hero" class="pt-32 pb-20 px-6">
+            <div class="container mx-auto">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <!-- Left: Text Content -->
+                    <div class="space-y-6">
+                        <h1 class="text-5xl md:text-6xl font-bold leading-tight">
+                            Master the Art of <span class="gradient-text">Quality Sleep</span>
+                        </h1>
+                        <p class="text-xl text-gray-300">
+                            Transform your nights and energize your days with science-backed sleep techniques.
+                            Join thousands who have already improved their sleep quality.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <button onclick="document.getElementById('courses').scrollIntoView({behavior: 'smooth'})"
+                                    class="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 px-8 py-4 rounded-lg font-semibold text-lg transition transform hover:scale-105">
+                                Start Learning Free
+                            </button>
+                            <button onclick="document.getElementById('benefits').scrollIntoView({behavior: 'smooth'})"
+                                    class="glass px-8 py-4 rounded-lg font-semibold text-lg transition hover:bg-white/10">
+                                Learn More
+                            </button>
+                        </div>
+                        <div class="flex items-center space-x-8 text-sm text-gray-400">
+                            <div class="flex items-center space-x-2">
+                                <span class="text-2xl">⭐</span>
+                                <span>Science-backed</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-2xl">🎓</span>
+                                <span>Expert-led</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-2xl">🆓</span>
+                                <span>Free access</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Video -->
+                    <div class="glass p-4 rounded-2xl">
+                        <div class="relative" style="padding-bottom: 56.25%;">
+                            <iframe
+                                class="absolute top-0 left-0 w-full h-full rounded-lg"
+                                src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                                title="Sleep Education Introduction"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Courses Section -->
+        <section id="courses" class="py-20 px-6">
+            <div class="container mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                        Your Journey to <span class="gradient-text">Better Sleep</span>
+                    </h2>
+                    <p class="text-xl text-gray-300">
+                        Structured courses designed to transform your sleep, one lesson at a time
+                    </p>
+                </div>
+
+                <!-- Courses will be loaded here -->
+                <div id="courses-container" class="space-y-12">
+                    <!-- Loading state -->
+                    <div class="text-center py-12">
+                        <div class="animate-spin inline-block w-12 h-12 border-4 border-purple-500 border-t-transparent rounded-full"></div>
+                        <p class="mt-4 text-gray-400">Loading courses...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bento Grid Section -->
+        <section id="benefits" class="py-20 px-6">
+            <div class="container mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                        Why <span class="gradient-text">Sleep Matters</span>
+                    </h2>
+                    <p class="text-xl text-gray-300">
+                        The life-changing benefits of quality sleep
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Benefit Card 1 -->
+                    <div class="glass p-8 rounded-2xl hover:bg-white/10 transition">
+                        <div class="text-4xl mb-4">🧠</div>
+                        <h3 class="text-2xl font-bold mb-3">Enhanced Cognition</h3>
+                        <p class="text-gray-300">
+                            Improve memory, focus, and decision-making with quality sleep.
+                        </p>
+                    </div>
+
+                    <!-- Benefit Card 2 -->
+                    <div class="glass p-8 rounded-2xl hover:bg-white/10 transition">
+                        <div class="text-4xl mb-4">💪</div>
+                        <h3 class="text-2xl font-bold mb-3">Physical Health</h3>
+                        <p class="text-gray-300">
+                            Boost immunity, metabolism, and physical recovery through rest.
+                        </p>
+                    </div>
+
+                    <!-- Benefit Card 3 -->
+                    <div class="glass p-8 rounded-2xl hover:bg-white/10 transition">
+                        <div class="text-4xl mb-4">😊</div>
+                        <h3 class="text-2xl font-bold mb-3">Mental Wellness</h3>
+                        <p class="text-gray-300">
+                            Reduce stress, anxiety, and improve overall mood and emotional balance.
+                        </p>
+                    </div>
+
+                    <!-- Benefit Card 4 -->
+                    <div class="glass p-8 rounded-2xl hover:bg-white/10 transition">
+                        <div class="text-4xl mb-4">⚡</div>
+                        <h3 class="text-2xl font-bold mb-3">More Energy</h3>
+                        <p class="text-gray-300">
+                            Wake up refreshed and maintain consistent energy throughout the day.
+                        </p>
+                    </div>
+
+                    <!-- Benefit Card 5 -->
+                    <div class="glass p-8 rounded-2xl hover:bg-white/10 transition">
+                        <div class="text-4xl mb-4">🎯</div>
+                        <h3 class="text-2xl font-bold mb-3">Peak Performance</h3>
+                        <p class="text-gray-300">
+                            Achieve your goals faster with improved productivity and focus.
+                        </p>
+                    </div>
+
+                    <!-- Benefit Card 6 -->
+                    <div class="glass p-8 rounded-2xl hover:bg-white/10 transition">
+                        <div class="text-4xl mb-4">❤️</div>
+                        <h3 class="text-2xl font-bold mb-3">Longevity</h3>
+                        <p class="text-gray-300">
+                            Research shows quality sleep is linked to a longer, healthier life.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="glass py-12 px-6 mt-20">
+            <div class="container mx-auto">
+                <div class="grid md:grid-cols-3 gap-8 mb-8">
+                    <div>
+                        <div class="flex items-center space-x-2 mb-4">
+                            <span class="text-3xl">🌙</span>
+                            <span class="text-2xl font-bold gradient-text">SleepWell</span>
+                        </div>
+                        <p class="text-gray-400">
+                            Empowering people to achieve better sleep through science-backed education.
+                        </p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-4">Quick Links</h4>
+                        <ul class="space-y-2 text-gray-400">
+                            <li><a href="#hero" class="hover:text-purple-400 transition">Home</a></li>
+                            <li><a href="#courses" class="hover:text-purple-400 transition">Courses</a></li>
+                            <li><a href="#benefits" class="hover:text-purple-400 transition">Benefits</a></li>
+                            <li><a href="/admin" class="hover:text-purple-400 transition">Admin</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-4">Connect</h4>
+                        <p class="text-gray-400 mb-4">
+                            Join our community for exclusive content and support.
+                        </p>
+                        <button class="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-lg transition">
+                            Join Facebook Group
+                        </button>
+                    </div>
+                </div>
+                <div class="border-t border-gray-700 pt-8 text-center text-gray-400">
+                    <p>&copy; 2024 SleepWell. All rights reserved. Built with care for better sleep.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Backend URL - CONFIGURE THIS
+        const ROOT = 'http://localhost:3000';
+
+        // Generate stars
+        function generateStars() {
+            const starsContainer = document.getElementById('stars');
+            const numberOfStars = 100;
+
+            for (let i = 0; i < numberOfStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Fetch and display courses
+        async function loadCourses() {
+            try {
+                const response = await fetch(`${ROOT}/api/courses`);
+                const data = await response.json();
+
+                const coursesContainer = document.getElementById('courses-container');
+
+                if (!data.courses || data.courses.length === 0) {
+                    coursesContainer.innerHTML = `
+                        <div class="text-center py-12">
+                            <p class="text-xl text-gray-400">No courses available yet. Check back soon!</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                coursesContainer.innerHTML = data.courses.map(course => `
+                    <div class="glass p-8 rounded-2xl">
+                        <h3 class="text-3xl font-bold mb-3">${course.title}</h3>
+                        <p class="text-gray-300 mb-6">${course.description}</p>
+                        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                            ${course.lessons.map(lesson => `
+                                <div class="lesson-card glass p-6 rounded-xl" onclick="openLesson('${lesson.id}')">
+                                    <div class="flex items-start justify-between mb-3">
+                                        <span class="bg-purple-600 text-xs px-3 py-1 rounded-full">Lesson ${lesson.order}</span>
+                                        <span class="text-xs text-gray-400">${lesson.duration}</span>
+                                    </div>
+                                    <h4 class="text-lg font-bold mb-2">${lesson.title}</h4>
+                                    <p class="text-sm text-gray-400">${lesson.description}</p>
+                                    <div class="mt-4 flex items-center text-purple-400 text-sm font-semibold">
+                                        <span>Watch Now</span>
+                                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error('Error loading courses:', error);
+                document.getElementById('courses-container').innerHTML = `
+                    <div class="text-center py-12">
+                        <p class="text-xl text-red-400">Failed to load courses. Please try again later.</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Open lesson (redirect to Facebook)
+        async function openLesson(lessonId) {
+            try {
+                const response = await fetch(`${ROOT}/api/lesson/${lessonId}/redirect`);
+                const data = await response.json();
+
+                if (data.redirectUrl) {
+                    // Redirect to Facebook video
+                    window.location.href = data.redirectUrl;
+                } else {
+                    alert('Video URL not available for this lesson.');
+                }
+            } catch (error) {
+                console.error('Error opening lesson:', error);
+                alert('Failed to open lesson. Please try again.');
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            generateStars();
+            loadCourses();
+        });
+    </script>
+</body>
+</html>
