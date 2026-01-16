@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - SleepWell</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: linear-gradient(to bottom, #0a0e27 0%, #1a1f3a 50%, #2d1b4e 100%);
+            min-height: 100vh;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body class="text-white">
+    <div class="min-h-screen">
+        <!-- Header -->
+        <header class="glass">
+            <nav class="container mx-auto px-6 py-4">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-2">
+                        <span class="text-3xl">🌙</span>
+                        <span class="text-2xl font-bold gradient-text">SleepWell Admin</span>
+                    </div>
+                    <div class="flex space-x-4">
+                        <a href="/" class="hover:text-purple-400 transition">← Back to Site</a>
+                        <button id="logoutBtn" class="hidden hover:text-red-400 transition" onclick="logout()">Logout</button>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Login Screen -->
+        <div id="loginScreen" class="container mx-auto px-6 py-20">
+            <div class="max-w-md mx-auto">
+                <div class="glass p-8 rounded-2xl">
+                    <h2 class="text-3xl font-bold mb-6 text-center">Admin Login</h2>
+                    <form id="loginForm" class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Password</label>
+                            <input
+                                type="password"
+                                id="passwordInput"
+                                class="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 focus:outline-none focus:border-purple-500 transition"
+                                placeholder="Enter admin password"
+                                required
+                            />
+                        </div>
+                        <button
+                            type="submit"
+                            class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 py-3 rounded-lg font-semibold transition"
+                        >
+                            Login
+                        </button>
+                    </form>
+                    <p id="loginError" class="mt-4 text-red-400 text-sm text-center hidden"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Dashboard -->
+        <div id="adminDashboard" class="hidden container mx-auto px-6 py-10">
+            <!-- Actions Bar -->
+            <div class="mb-8 flex flex-wrap gap-4">
+                <button onclick="openCreateCourseModal()" class="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 px-6 py-3 rounded-lg font-semibold transition">
+                    + Create New Course
+                </button>
+                <button onclick="loadAdminCourses()" class="glass px-6 py-3 rounded-lg font-semibold hover:bg-white/10 transition">
+                    🔄 Refresh
+                </button>
+            </div>
+
+            <!-- Courses Container -->
+            <div id="adminCoursesContainer" class="space-y-8">
+                <!-- Loading state -->
+                <div class="text-center py-12">
+                    <div class="animate-spin inline-block w-12 h-12 border-4 border-purple-500 border-t-transparent rounded-full"></div>
+                    <p class="mt-4 text-gray-400">Loading courses...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create/Edit Course Modal -->
+    <div id="courseModal" class="modal">
+        <div class="glass p-8 rounded-2xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h3 id="courseModalTitle" class="text-2xl font-bold">Create New Course</h3>
+                <button onclick="closeCourseModal()" class="text-2xl hover:text-red-400 transition">&times;</button>
+            </div>
+            <form id="courseForm" class="space-y-4">
+                <input type="hidden" id="courseId" />
+                <div>
+                    <label class="block text-sm font-semibold mb-2">Course Title</label>
+                    <input
+                        type="text"
+                        id="courseTitle"
+                        class="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 focus:outline-none focus:border-purple-500 transition"
+                        required
+                    />
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold mb-2">Course Description</label>
+                    <textarea
+                        id="courseDescription"
+                        rows="3"
+                        class="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 focus:outline-none focus:border-purple-500 transition"
+                        required
+                    ></textarea>
+                </div>
+                <div class="flex gap-4">
+                    <button
+                        type="submit"
+                        class="flex-1 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 py-3 rounded-lg font-semibold transition"
+                    >
+                        Save Course
+                    </button>
+                    <button
+                        type="button"
+                        onclick="closeCourseModal()"
+                        class="flex-1 glass py-3 rounded-lg font-semibold hover:bg-white/10 transition"
+                    >
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Create/Edit Lesson Modal -->
+    <div id="lessonModal" class="modal">
+        <div class="glass p-8 rounded-2xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h3 id="lessonModalTitle" class="text-2xl font-bold">Create New Lesson</h3>
+                <button onclick="closeLessonModal()" class="text-2xl hover:text-red-400 transition">&times;</button>
+            </div>
+            <form id="lessonForm" class="space-y-4">
+                <input type="hidden" id="lessonCourseId" />
+                <input type="hidden" id="lessonId" />
+                <div>
+                    <label class="block text-sm font-semibold mb-2">Lesson Title</label>
+                    <input
+                        type="text"
+                        id="lessonTitle"
+                        class="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 focus:outline-none focus:border-purple-500 transition"
+                        required
+                    />
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold mb-2">Lesson Description</label>
+                    <textarea
+                        id="lessonDescription"
+                        rows="3"
+                        class="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 focus:outline-none focus:border-purple-500 transition"
+                        required
+                    ></textarea>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold mb-2">Duration (e.g., "15 min")</label>
+                    <input
+                        type="text"
+                        id="lessonDuration"
+                        class="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 focus:outline-none focus:border-purple-500 transition"
+                        required
+                    />
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold mb-2">Facebook Video URL</label>
+                    <input
+                        type="url"
+                        id="lessonFbUrl"
+                        class="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 focus:outline-none focus:border-purple-500 transition"
+                        placeholder="https://www.facebook.com/groups/..."
+                        required
+                    />
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold mb-2">Order</label>
+                    <input
+                        type="number"
+                        id="lessonOrder"
+                        min="1"
+                        class="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 focus:outline-none focus:border-purple-500 transition"
+                        required
+                    />
+                </div>
+                <div class="flex gap-4">
+                    <button
+                        type="submit"
+                        class="flex-1 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 py-3 rounded-lg font-semibold transition"
+                    >
+                        Save Lesson
+                    </button>
+                    <button
+                        type="button"
+                        onclick="closeLessonModal()"
+                        class="flex-1 glass py-3 rounded-lg font-semibold hover:bg-white/10 transition"
+                    >
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Backend URL - CONFIGURE THIS
+        const ROOT = 'http://localhost:3000';
+
+        let adminPassword = '';
+
+        // Login
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const password = document.getElementById('passwordInput').value;
+
+            try {
+                const response = await fetch(`${ROOT}/api/admin/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    adminPassword = password;
+                    document.getElementById('loginScreen').classList.add('hidden');
+                    document.getElementById('adminDashboard').classList.remove('hidden');
+                    document.getElementById('logoutBtn').classList.remove('hidden');
+                    loadAdminCourses();
+                } else {
+                    document.getElementById('loginError').textContent = data.error || 'Login failed';
+                    document.getElementById('loginError').classList.remove('hidden');
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                document.getElementById('loginError').textContent = 'Connection error. Please try again.';
+                document.getElementById('loginError').classList.remove('hidden');
+            }
+        });
+
+        // Logout
+        function logout() {
+            adminPassword = '';
+            document.getElementById('loginScreen').classList.remove('hidden');
+            document.getElementById('adminDashboard').classList.add('hidden');
+            document.getElementById('logoutBtn').classList.add('hidden');
+            document.getElementById('passwordInput').value = '';
+        }
+
+        // Load courses for admin
+        async function loadAdminCourses() {
+            try {
+                const response = await fetch(`${ROOT}/api/admin/courses`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ password: adminPassword })
+                });
+
+                const data = await response.json();
+                const container = document.getElementById('adminCoursesContainer');
+
+                if (!data.courses || data.courses.length === 0) {
+                    container.innerHTML = `
+                        <div class="glass p-8 rounded-2xl text-center">
+                            <p class="text-xl text-gray-400">No courses yet. Create your first course!</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                container.innerHTML = data.courses.map(course => `
+                    <div class="glass p-8 rounded-2xl">
+                        <div class="flex justify-between items-start mb-6">
+                            <div>
+                                <h3 class="text-3xl font-bold mb-2">${course.title}</h3>
+                                <p class="text-gray-300">${course.description}</p>
+                                <p class="text-sm text-gray-500 mt-2">Course ID: ${course.id}</p>
+                            </div>
+                            <div class="flex gap-2">
+                                <button
+                                    onclick='editCourse(${JSON.stringify(course)})'
+                                    class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg text-sm transition"
+                                >
+                                    Edit
+                                </button>
+                                <button
+                                    onclick="deleteCourse('${course.id}')"
+                                    class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg text-sm transition"
+                                >
+                                    Delete
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <button
+                                onclick="openCreateLessonModal('${course.id}')"
+                                class="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg text-sm transition"
+                            >
+                                + Add Lesson
+                            </button>
+                        </div>
+
+                        <div class="space-y-3">
+                            ${course.lessons.length === 0 ? '<p class="text-gray-400 text-sm">No lessons yet</p>' : ''}
+                            ${course.lessons.map(lesson => `
+                                <div class="bg-white/5 p-4 rounded-lg border border-white/10">
+                                    <div class="flex justify-between items-start">
+                                        <div class="flex-1">
+                                            <div class="flex items-center gap-3 mb-2">
+                                                <span class="bg-purple-600 text-xs px-2 py-1 rounded">Lesson ${lesson.order}</span>
+                                                <h4 class="text-lg font-bold">${lesson.title}</h4>
+                                                <span class="text-sm text-gray-400">${lesson.duration}</span>
+                                            </div>
+                                            <p class="text-sm text-gray-300 mb-2">${lesson.description}</p>
+                                            <p class="text-xs text-gray-500">ID: ${lesson.id}</p>
+                                            <a href="${lesson.fbUrl}" target="_blank" class="text-xs text-blue-400 hover:text-blue-300 break-all">
+                                                ${lesson.fbUrl}
+                                            </a>
+                                        </div>
+                                        <div class="flex gap-2 ml-4">
+                                            <button
+                                                onclick='editLesson("${course.id}", ${JSON.stringify(lesson)})'
+                                                class="bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded text-xs transition"
+                                            >
+                                                Edit
+                                            </button>
+                                            <button
+                                                onclick="deleteLesson('${course.id}', '${lesson.id}')"
+                                                class="bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-xs transition"
+                                            >
+                                                Delete
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error('Error loading courses:', error);
+            }
+        }
+
+        // Course Modal Functions
+        function openCreateCourseModal() {
+            document.getElementById('courseModalTitle').textContent = 'Create New Course';
+            document.getElementById('courseId').value = '';
+            document.getElementById('courseTitle').value = '';
+            document.getElementById('courseDescription').value = '';
+            document.getElementById('courseModal').classList.add('active');
+        }
+
+        function editCourse(course) {
+            document.getElementById('courseModalTitle').textContent = 'Edit Course';
+            document.getElementById('courseId').value = course.id;
+            document.getElementById('courseTitle').value = course.title;
+            document.getElementById('courseDescription').value = course.description;
+            document.getElementById('courseModal').classList.add('active');
+        }
+
+        function closeCourseModal() {
+            document.getElementById('courseModal').classList.remove('active');
+        }
+
+        document.getElementById('courseForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const courseId = document.getElementById('courseId').value;
+            const course = {
+                title: document.getElementById('courseTitle').value,
+                description: document.getElementById('courseDescription').value,
+                lessons: []
+            };
+
+            const endpoint = courseId ? '/api/admin/courses/update' : '/api/admin/courses/create';
+            const body = courseId
+                ? { password: adminPassword, courseId, course }
+                : { password: adminPassword, course };
+
+            try {
+                const response = await fetch(`${ROOT}${endpoint}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body)
+                });
+
+                if (response.ok) {
+                    closeCourseModal();
+                    loadAdminCourses();
+                } else {
+                    alert('Failed to save course');
+                }
+            } catch (error) {
+                console.error('Error saving course:', error);
+                alert('Error saving course');
+            }
+        });
+
+        async function deleteCourse(courseId) {
+            if (!confirm('Are you sure you want to delete this course and all its lessons?')) return;
+
+            try {
+                const response = await fetch(`${ROOT}/api/admin/courses/delete`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ password: adminPassword, courseId })
+                });
+
+                if (response.ok) {
+                    loadAdminCourses();
+                } else {
+                    alert('Failed to delete course');
+                }
+            } catch (error) {
+                console.error('Error deleting course:', error);
+                alert('Error deleting course');
+            }
+        }
+
+        // Lesson Modal Functions
+        function openCreateLessonModal(courseId) {
+            document.getElementById('lessonModalTitle').textContent = 'Create New Lesson';
+            document.getElementById('lessonCourseId').value = courseId;
+            document.getElementById('lessonId').value = '';
+            document.getElementById('lessonTitle').value = '';
+            document.getElementById('lessonDescription').value = '';
+            document.getElementById('lessonDuration').value = '';
+            document.getElementById('lessonFbUrl').value = '';
+            document.getElementById('lessonOrder').value = '1';
+            document.getElementById('lessonModal').classList.add('active');
+        }
+
+        function editLesson(courseId, lesson) {
+            document.getElementById('lessonModalTitle').textContent = 'Edit Lesson';
+            document.getElementById('lessonCourseId').value = courseId;
+            document.getElementById('lessonId').value = lesson.id;
+            document.getElementById('lessonTitle').value = lesson.title;
+            document.getElementById('lessonDescription').value = lesson.description;
+            document.getElementById('lessonDuration').value = lesson.duration;
+            document.getElementById('lessonFbUrl').value = lesson.fbUrl;
+            document.getElementById('lessonOrder').value = lesson.order;
+            document.getElementById('lessonModal').classList.add('active');
+        }
+
+        function closeLessonModal() {
+            document.getElementById('lessonModal').classList.remove('active');
+        }
+
+        document.getElementById('lessonForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const courseId = document.getElementById('lessonCourseId').value;
+            const lessonId = document.getElementById('lessonId').value;
+            const lesson = {
+                title: document.getElementById('lessonTitle').value,
+                description: document.getElementById('lessonDescription').value,
+                duration: document.getElementById('lessonDuration').value,
+                fbUrl: document.getElementById('lessonFbUrl').value,
+                order: parseInt(document.getElementById('lessonOrder').value)
+            };
+
+            const endpoint = lessonId ? '/api/admin/lessons/update' : '/api/admin/lessons/create';
+            const body = lessonId
+                ? { password: adminPassword, courseId, lessonId, lesson }
+                : { password: adminPassword, courseId, lesson };
+
+            try {
+                const response = await fetch(`${ROOT}${endpoint}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body)
+                });
+
+                if (response.ok) {
+                    closeLessonModal();
+                    loadAdminCourses();
+                } else {
+                    alert('Failed to save lesson');
+                }
+            } catch (error) {
+                console.error('Error saving lesson:', error);
+                alert('Error saving lesson');
+            }
+        });
+
+        async function deleteLesson(courseId, lessonId) {
+            if (!confirm('Are you sure you want to delete this lesson?')) return;
+
+            try {
+                const response = await fetch(`${ROOT}/api/admin/lessons/delete`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ password: adminPassword, courseId, lessonId })
+                });
+
+                if (response.ok) {
+                    loadAdminCourses();
+                } else {
+                    alert('Failed to delete lesson');
+                }
+            } catch (error) {
+                console.error('Error deleting lesson:', error);
+                alert('Error deleting lesson');
+            }
+        }
+    </script>
+</body>
+</html>
