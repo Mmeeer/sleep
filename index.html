@@ -92,7 +92,7 @@
                     <div class="hidden md:flex space-x-8">
                         <a href="#hero" class="hover:text-purple-400 transition">Home</a>
                         <a href="#courses" class="hover:text-purple-400 transition">Courses</a>
-                        <a href="#benefits" class="hover:text-purple-400 transition">Benefits</a>
+                        <a href="#challenge" class="hover:text-purple-400 transition">Challenge</a>
                         <a href="/admin.html" class="hover:text-purple-400 transition">Admin</a>
                     </div>
                     <button class="md:hidden text-white">
@@ -122,9 +122,9 @@
                                     class="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 px-8 py-4 rounded-lg font-semibold text-lg transition transform hover:scale-105">
                                 Start Learning Free
                             </button>
-                            <button onclick="document.getElementById('benefits').scrollIntoView({behavior: 'smooth'})"
+                            <button onclick="document.getElementById('challenge').scrollIntoView({behavior: 'smooth'})"
                                     class="glass px-8 py-4 rounded-lg font-semibold text-lg transition hover:bg-white/10">
-                                Learn More
+                                Take Challenge
                             </button>
                         </div>
                         <div class="flex items-center space-x-8 text-sm text-gray-400">
@@ -183,71 +183,24 @@
             </div>
         </section>
 
-        <!-- Bento Grid Section -->
-        <section id="benefits" class="py-20 px-6">
+        <!-- Challenge Section -->
+        <section id="challenge" class="py-20 px-6">
             <div class="container mx-auto">
                 <div class="text-center mb-16">
                     <h2 class="text-4xl md:text-5xl font-bold mb-4">
-                        Why <span class="gradient-text">Sleep Matters</span>
+                        🎯 Take the <span class="gradient-text">Sleep Challenge</span>
                     </h2>
                     <p class="text-xl text-gray-300">
-                        The life-changing benefits of quality sleep
+                        Transform your sleep habits with our structured daily challenge
                     </p>
                 </div>
 
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- Benefit Card 1 -->
-                    <div class="glass p-8 rounded-2xl hover:bg-white/10 transition">
-                        <div class="text-4xl mb-4">🧠</div>
-                        <h3 class="text-2xl font-bold mb-3">Enhanced Cognition</h3>
-                        <p class="text-gray-300">
-                            Improve memory, focus, and decision-making with quality sleep.
-                        </p>
-                    </div>
-
-                    <!-- Benefit Card 2 -->
-                    <div class="glass p-8 rounded-2xl hover:bg-white/10 transition">
-                        <div class="text-4xl mb-4">💪</div>
-                        <h3 class="text-2xl font-bold mb-3">Physical Health</h3>
-                        <p class="text-gray-300">
-                            Boost immunity, metabolism, and physical recovery through rest.
-                        </p>
-                    </div>
-
-                    <!-- Benefit Card 3 -->
-                    <div class="glass p-8 rounded-2xl hover:bg-white/10 transition">
-                        <div class="text-4xl mb-4">😊</div>
-                        <h3 class="text-2xl font-bold mb-3">Mental Wellness</h3>
-                        <p class="text-gray-300">
-                            Reduce stress, anxiety, and improve overall mood and emotional balance.
-                        </p>
-                    </div>
-
-                    <!-- Benefit Card 4 -->
-                    <div class="glass p-8 rounded-2xl hover:bg-white/10 transition">
-                        <div class="text-4xl mb-4">⚡</div>
-                        <h3 class="text-2xl font-bold mb-3">More Energy</h3>
-                        <p class="text-gray-300">
-                            Wake up refreshed and maintain consistent energy throughout the day.
-                        </p>
-                    </div>
-
-                    <!-- Benefit Card 5 -->
-                    <div class="glass p-8 rounded-2xl hover:bg-white/10 transition">
-                        <div class="text-4xl mb-4">🎯</div>
-                        <h3 class="text-2xl font-bold mb-3">Peak Performance</h3>
-                        <p class="text-gray-300">
-                            Achieve your goals faster with improved productivity and focus.
-                        </p>
-                    </div>
-
-                    <!-- Benefit Card 6 -->
-                    <div class="glass p-8 rounded-2xl hover:bg-white/10 transition">
-                        <div class="text-4xl mb-4">❤️</div>
-                        <h3 class="text-2xl font-bold mb-3">Longevity</h3>
-                        <p class="text-gray-300">
-                            Research shows quality sleep is linked to a longer, healthier life.
-                        </p>
+                <!-- Challenge will be loaded here -->
+                <div id="challenge-container">
+                    <!-- Loading state -->
+                    <div class="text-center py-12">
+                        <div class="animate-spin inline-block w-12 h-12 border-4 border-green-500 border-t-transparent rounded-full"></div>
+                        <p class="mt-4 text-gray-400">Loading challenge...</p>
                     </div>
                 </div>
             </div>
@@ -271,7 +224,7 @@
                         <ul class="space-y-2 text-gray-400">
                             <li><a href="#hero" class="hover:text-purple-400 transition">Home</a></li>
                             <li><a href="#courses" class="hover:text-purple-400 transition">Courses</a></li>
-                            <li><a href="#benefits" class="hover:text-purple-400 transition">Benefits</a></li>
+                            <li><a href="#challenge" class="hover:text-purple-400 transition">Challenge</a></li>
                             <li><a href="/admin.html" class="hover:text-purple-400 transition">Admin</a></li>
                         </ul>
                     </div>
@@ -381,10 +334,89 @@
             }
         }
 
+        // Fetch and display challenge
+        async function loadChallenge() {
+            try {
+                const response = await fetch(`${ROOT}/api/challenge`);
+                const data = await response.json();
+
+                const challengeContainer = document.getElementById('challenge-container');
+
+                if (!data.challenge) {
+                    challengeContainer.innerHTML = `
+                        <div class="text-center py-12">
+                            <p class="text-xl text-gray-400">No active challenge at the moment. Check back soon!</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                const challenge = data.challenge;
+
+                challengeContainer.innerHTML = `
+                    <div class="glass p-8 md:p-12 rounded-3xl max-w-5xl mx-auto">
+                        <div class="text-center mb-12">
+                            <h3 class="text-3xl md:text-4xl font-bold mb-4">${challenge.title}</h3>
+                            <p class="text-lg text-gray-300 mb-2">${challenge.description}</p>
+                            <span class="inline-block bg-green-600 px-4 py-2 rounded-full text-sm font-semibold">
+                                ${challenge.duration}
+                            </span>
+                        </div>
+
+                        <div class="relative">
+                            <!-- Timeline connector -->
+                            <div class="hidden md:block absolute left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-green-600 via-teal-500 to-green-600 transform -translate-x-1/2"></div>
+
+                            <!-- Challenge days -->
+                            <div class="space-y-6">
+                                ${challenge.days.map((day, index) => `
+                                    <div class="relative flex items-center ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}">
+                                        <!-- Timeline dot -->
+                                        <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-green-500 rounded-full border-4 border-black z-10"></div>
+
+                                        <!-- Card -->
+                                        <div class="w-full md:w-5/12 ${index % 2 === 0 ? 'md:pr-12' : 'md:pl-12'}">
+                                            <div class="bg-gradient-to-br from-white/10 to-white/5 p-6 rounded-2xl border border-white/20 hover:border-green-500/50 transition-all duration-300 hover:transform hover:scale-105 ${day.fbUrl ? 'cursor-pointer' : ''}"
+                                                 ${day.fbUrl ? `onclick="window.location.href='${day.fbUrl}'"` : ''}>
+                                                <div class="flex items-center gap-3 mb-3">
+                                                    <span class="text-4xl">${day.icon}</span>
+                                                    <span class="bg-green-600 text-sm px-3 py-1 rounded-full font-bold">
+                                                        Day ${day.day}
+                                                    </span>
+                                                    ${day.fbUrl ? '<span class="ml-auto text-green-400 text-sm">▶ Watch</span>' : ''}
+                                                </div>
+                                                <h4 class="text-xl font-bold mb-2">${day.title}</h4>
+                                                <p class="text-gray-300 text-sm">${day.description}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+
+                        <div class="text-center mt-12">
+                            <button onclick="document.getElementById('courses').scrollIntoView({behavior: 'smooth'})"
+                                    class="bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 px-8 py-4 rounded-lg font-semibold text-lg transition transform hover:scale-105">
+                                Start Your Journey
+                            </button>
+                        </div>
+                    </div>
+                `;
+            } catch (error) {
+                console.error('Error loading challenge:', error);
+                document.getElementById('challenge-container').innerHTML = `
+                    <div class="text-center py-12">
+                        <p class="text-xl text-red-400">Failed to load challenge. Please try again later.</p>
+                    </div>
+                `;
+            }
+        }
+
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
             generateStars();
             loadCourses();
+            loadChallenge();
         });
     </script>
 </body>
