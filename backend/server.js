@@ -15,6 +15,7 @@ app.use(bodyParser.json());
 // Data file paths
 const DATA_DIR = path.join(__dirname, 'data');
 const COURSES_FILE = path.join(DATA_DIR, 'courses.json');
+const CHALLENGES_FILE = path.join(DATA_DIR, 'challenges.json');
 
 // Ensure data directory exists
 if (!fs.existsSync(DATA_DIR)) {
@@ -27,6 +28,14 @@ if (!fs.existsSync(COURSES_FILE)) {
     courses: []
   };
   fs.writeFileSync(COURSES_FILE, JSON.stringify(initialData, null, 2));
+}
+
+// Initialize challenges file if it doesn't exist
+if (!fs.existsSync(CHALLENGES_FILE)) {
+  const initialData = {
+    challenge: null
+  };
+  fs.writeFileSync(CHALLENGES_FILE, JSON.stringify(initialData, null, 2));
 }
 
 // Helper functions
@@ -46,6 +55,26 @@ const writeCourses = (data) => {
     return true;
   } catch (error) {
     console.error('Error writing courses:', error);
+    return false;
+  }
+};
+
+const readChallenge = () => {
+  try {
+    const data = fs.readFileSync(CHALLENGES_FILE, 'utf8');
+    return JSON.parse(data);
+  } catch (error) {
+    console.error('Error reading challenge:', error);
+    return { challenge: null };
+  }
+};
+
+const writeChallenge = (data) => {
+  try {
+    fs.writeFileSync(CHALLENGES_FILE, JSON.stringify(data, null, 2));
+    return true;
+  } catch (error) {
+    console.error('Error writing challenge:', error);
     return false;
   }
 };
@@ -319,6 +348,90 @@ app.get('/api/lesson/:lessonId/redirect', (req, res) => {
     res.json({ redirectUrl: foundLesson.fbUrl });
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch lesson' });
+  }
+});
+
+// ==================== CHALLENGE ENDPOINTS ====================
+
+// Get active challenge (public)
+app.get('/api/challenge', (req, res) => {
+  try {
+    const data = readChallenge();
+
+    if (!data.challenge) {
+      return res.json({ challenge: null });
+    }
+
+    // Return challenge without sensitive data
+    res.json({ challenge: data.challenge });
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch challenge' });
+  }
+});
+
+// Get challenge (admin only)
+app.post('/api/admin/challenge', (req, res) => {
+  const { password } = req.body;
+
+  if (!verifyAdmin(password)) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
+
+  try {
+    const data = readChallenge();
+    res.json(data);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch challenge' });
+  }
+});
+
+// Create or update challenge (admin only)
+app.post('/api/admin/challenge/save', (req, res) => {
+  const { password, challenge } = req.body;
+
+  if (!verifyAdmin(password)) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
+
+  try {
+    const newChallenge = challenge ? {
+      id: challenge.id || Date.now().toString(),
+      title: challenge.title,
+      description: challenge.description,
+      duration: challenge.duration,
+      days: challenge.days || []
+    } : null;
+
+    const data = { challenge: newChallenge };
+
+    if (writeChallenge(data)) {
+      res.json({ success: true, challenge: newChallenge });
+    } else {
+      res.status(500).json({ error: 'Failed to save challenge' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to save challenge' });
+  }
+});
+
+// Delete challenge (admin only)
+app.post('/api/admin/challenge/delete', (req, res) => {
+  const { password } = req.body;
+
+  if (!verifyAdmin(password)) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
+
+  try {
+    const data = { challenge: null };
+
+    if (writeChallenge(data)) {
+      res.json({ success: true });
+    } else {
+      res.status(500).json({ error: 'Failed to delete challenge' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to delete challenge' });
   }
 });
 

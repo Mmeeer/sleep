@@ -90,22 +90,49 @@
 
         <!-- Admin Dashboard -->
         <div id="adminDashboard" class="hidden container mx-auto px-6 py-10">
-            <!-- Actions Bar -->
-            <div class="mb-8 flex flex-wrap gap-4">
-                <button onclick="openCreateCourseModal()" class="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 px-6 py-3 rounded-lg font-semibold transition">
-                    + Create New Course
-                </button>
-                <button onclick="loadAdminCourses()" class="glass px-6 py-3 rounded-lg font-semibold hover:bg-white/10 transition">
-                    🔄 Refresh
-                </button>
+            <!-- Challenge Section -->
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold mb-6">🎯 Sleep Challenge</h2>
+                <div class="mb-4 flex flex-wrap gap-4">
+                    <button onclick="openChallengeModal()" class="bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 px-6 py-3 rounded-lg font-semibold transition">
+                        ✏️ Manage Challenge
+                    </button>
+                    <button onclick="loadAdminChallenge()" class="glass px-6 py-3 rounded-lg font-semibold hover:bg-white/10 transition">
+                        🔄 Refresh
+                    </button>
+                </div>
+
+                <!-- Challenge Container -->
+                <div id="adminChallengeContainer">
+                    <!-- Loading state -->
+                    <div class="text-center py-12">
+                        <div class="animate-spin inline-block w-12 h-12 border-4 border-green-500 border-t-transparent rounded-full"></div>
+                        <p class="mt-4 text-gray-400">Loading challenge...</p>
+                    </div>
+                </div>
             </div>
 
-            <!-- Courses Container -->
-            <div id="adminCoursesContainer" class="space-y-8">
-                <!-- Loading state -->
-                <div class="text-center py-12">
-                    <div class="animate-spin inline-block w-12 h-12 border-4 border-purple-500 border-t-transparent rounded-full"></div>
-                    <p class="mt-4 text-gray-400">Loading courses...</p>
+            <hr class="border-gray-700 my-12">
+
+            <!-- Courses Section -->
+            <div>
+                <h2 class="text-3xl font-bold mb-6">📚 Courses</h2>
+                <div class="mb-8 flex flex-wrap gap-4">
+                    <button onclick="openCreateCourseModal()" class="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 px-6 py-3 rounded-lg font-semibold transition">
+                        + Create New Course
+                    </button>
+                    <button onclick="loadAdminCourses()" class="glass px-6 py-3 rounded-lg font-semibold hover:bg-white/10 transition">
+                        🔄 Refresh
+                    </button>
+                </div>
+
+                <!-- Courses Container -->
+                <div id="adminCoursesContainer" class="space-y-8">
+                    <!-- Loading state -->
+                    <div class="text-center py-12">
+                        <div class="animate-spin inline-block w-12 h-12 border-4 border-purple-500 border-t-transparent rounded-full"></div>
+                        <p class="mt-4 text-gray-400">Loading courses...</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -233,6 +260,82 @@
         </div>
     </div>
 
+    <!-- Challenge Modal -->
+    <div id="challengeModal" class="modal">
+        <div class="glass p-8 rounded-2xl max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold">Manage Sleep Challenge</h3>
+                <button onclick="closeChallengeModal()" class="text-2xl hover:text-red-400 transition">&times;</button>
+            </div>
+            <form id="challengeForm" class="space-y-6">
+                <input type="hidden" id="challengeId" />
+
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Challenge Title</label>
+                        <input
+                            type="text"
+                            id="challengeTitle"
+                            class="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 focus:outline-none focus:border-green-500 transition"
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Duration (e.g., "10 days")</label>
+                        <input
+                            type="text"
+                            id="challengeDuration"
+                            class="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 focus:outline-none focus:border-green-500 transition"
+                            required
+                        />
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold mb-2">Challenge Description</label>
+                    <textarea
+                        id="challengeDescription"
+                        rows="3"
+                        class="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 focus:outline-none focus:border-green-500 transition"
+                        required
+                    ></textarea>
+                </div>
+
+                <div>
+                    <div class="flex justify-between items-center mb-4">
+                        <label class="block text-sm font-semibold">Challenge Days</label>
+                        <button
+                            type="button"
+                            onclick="addChallengeDay()"
+                            class="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg text-sm transition"
+                        >
+                            + Add Day
+                        </button>
+                    </div>
+                    <div id="challengeDaysContainer" class="space-y-3">
+                        <!-- Days will be added here dynamically -->
+                    </div>
+                </div>
+
+                <div class="flex gap-4">
+                    <button
+                        type="submit"
+                        class="flex-1 bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 py-3 rounded-lg font-semibold transition"
+                    >
+                        Save Challenge
+                    </button>
+                    <button
+                        type="button"
+                        onclick="closeChallengeModal()"
+                        class="flex-1 glass py-3 rounded-lg font-semibold hover:bg-white/10 transition"
+                    >
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- JavaScript -->
     <script>
         // Backend URL - CONFIGURE THIS
@@ -259,6 +362,7 @@
                     document.getElementById('loginScreen').classList.add('hidden');
                     document.getElementById('adminDashboard').classList.remove('hidden');
                     document.getElementById('logoutBtn').classList.remove('hidden');
+                    loadAdminChallenge();
                     loadAdminCourses();
                 } else {
                     document.getElementById('loginError').textContent = data.error || 'Login failed';
@@ -536,6 +640,253 @@
             } catch (error) {
                 console.error('Error deleting lesson:', error);
                 alert('Error deleting lesson');
+            }
+        }
+
+        // ==================== CHALLENGE FUNCTIONS ====================
+
+        let challengeDayCounter = 0;
+
+        async function loadAdminChallenge() {
+            try {
+                const response = await fetch(`${ROOT}/api/admin/challenge`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ password: adminPassword })
+                });
+
+                const data = await response.json();
+                const container = document.getElementById('adminChallengeContainer');
+
+                if (!data.challenge) {
+                    container.innerHTML = `
+                        <div class="glass p-8 rounded-2xl text-center">
+                            <p class="text-xl text-gray-400 mb-4">No active challenge. Create one to get started!</p>
+                            <button onclick="openChallengeModal()" class="bg-green-600 hover:bg-green-700 px-6 py-3 rounded-lg transition">
+                                Create Challenge
+                            </button>
+                        </div>
+                    `;
+                    return;
+                }
+
+                const challenge = data.challenge;
+                container.innerHTML = `
+                    <div class="glass p-8 rounded-2xl">
+                        <div class="flex justify-between items-start mb-6">
+                            <div>
+                                <h3 class="text-3xl font-bold mb-2">${challenge.title}</h3>
+                                <p class="text-gray-300 mb-2">${challenge.description}</p>
+                                <p class="text-sm text-gray-500">Duration: ${challenge.duration}</p>
+                            </div>
+                            <div class="flex gap-2">
+                                <button
+                                    onclick="editChallenge()"
+                                    class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg text-sm transition"
+                                >
+                                    Edit
+                                </button>
+                                <button
+                                    onclick="deleteChallenge()"
+                                    class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg text-sm transition"
+                                >
+                                    Delete
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                            ${challenge.days.map(day => `
+                                <div class="bg-white/5 p-4 rounded-lg border border-white/10">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <span class="text-2xl">${day.icon}</span>
+                                        <span class="bg-green-600 text-xs px-2 py-1 rounded">Day ${day.day}</span>
+                                    </div>
+                                    <h4 class="text-lg font-bold mb-2">${day.title}</h4>
+                                    <p class="text-sm text-gray-300">${day.description}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            } catch (error) {
+                console.error('Error loading challenge:', error);
+            }
+        }
+
+        function openChallengeModal() {
+            challengeDayCounter = 0;
+            document.getElementById('challengeId').value = '';
+            document.getElementById('challengeTitle').value = '';
+            document.getElementById('challengeDescription').value = '';
+            document.getElementById('challengeDuration').value = '';
+            document.getElementById('challengeDaysContainer').innerHTML = '';
+            document.getElementById('challengeModal').classList.add('active');
+        }
+
+        async function editChallenge() {
+            try {
+                const response = await fetch(`${ROOT}/api/admin/challenge`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ password: adminPassword })
+                });
+
+                const data = await response.json();
+                if (!data.challenge) return;
+
+                const challenge = data.challenge;
+                document.getElementById('challengeId').value = challenge.id;
+                document.getElementById('challengeTitle').value = challenge.title;
+                document.getElementById('challengeDescription').value = challenge.description;
+                document.getElementById('challengeDuration').value = challenge.duration;
+
+                // Load existing days
+                challengeDayCounter = 0;
+                document.getElementById('challengeDaysContainer').innerHTML = '';
+                challenge.days.forEach(day => {
+                    addChallengeDayWithData(day);
+                });
+
+                document.getElementById('challengeModal').classList.add('active');
+            } catch (error) {
+                console.error('Error loading challenge for edit:', error);
+            }
+        }
+
+        function closeChallengeModal() {
+            document.getElementById('challengeModal').classList.remove('active');
+        }
+
+        function addChallengeDay() {
+            addChallengeDayWithData({ day: challengeDayCounter + 1, title: '', description: '', icon: '⭐' });
+        }
+
+        function addChallengeDayWithData(dayData) {
+            const dayIndex = challengeDayCounter++;
+            const container = document.getElementById('challengeDaysContainer');
+
+            const dayDiv = document.createElement('div');
+            dayDiv.className = 'bg-white/5 p-4 rounded-lg border border-white/10';
+            dayDiv.id = `challengeDay_${dayIndex}`;
+            dayDiv.innerHTML = `
+                <div class="flex justify-between items-center mb-3">
+                    <span class="font-bold text-green-400">Day ${dayData.day}</span>
+                    <button type="button" onclick="removeChallengeDay(${dayIndex})" class="text-red-400 hover:text-red-300">
+                        Remove
+                    </button>
+                </div>
+                <div class="grid gap-3">
+                    <div class="grid md:grid-cols-2 gap-3">
+                        <input
+                            type="number"
+                            placeholder="Day number"
+                            value="${dayData.day}"
+                            class="challengeDayNum bg-white/10 border border-white/20 rounded px-3 py-2 text-sm focus:outline-none focus:border-green-500"
+                        />
+                        <input
+                            type="text"
+                            placeholder="Icon (emoji)"
+                            value="${dayData.icon}"
+                            class="challengeDayIcon bg-white/10 border border-white/20 rounded px-3 py-2 text-sm focus:outline-none focus:border-green-500"
+                        />
+                    </div>
+                    <input
+                        type="text"
+                        placeholder="Day title"
+                        value="${dayData.title}"
+                        class="challengeDayTitle bg-white/10 border border-white/20 rounded px-3 py-2 text-sm focus:outline-none focus:border-green-500"
+                    />
+                    <textarea
+                        placeholder="Day description"
+                        rows="2"
+                        class="challengeDayDesc bg-white/10 border border-white/20 rounded px-3 py-2 text-sm focus:outline-none focus:border-green-500"
+                    >${dayData.description}</textarea>
+                </div>
+            `;
+            container.appendChild(dayDiv);
+        }
+
+        function removeChallengeDay(dayIndex) {
+            const dayDiv = document.getElementById(`challengeDay_${dayIndex}`);
+            if (dayDiv) {
+                dayDiv.remove();
+            }
+        }
+
+        document.getElementById('challengeForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const challengeId = document.getElementById('challengeId').value;
+            const title = document.getElementById('challengeTitle').value;
+            const description = document.getElementById('challengeDescription').value;
+            const duration = document.getElementById('challengeDuration').value;
+
+            // Collect all days
+            const days = [];
+            const dayDivs = document.querySelectorAll('[id^="challengeDay_"]');
+            dayDivs.forEach(dayDiv => {
+                const dayNum = dayDiv.querySelector('.challengeDayNum').value;
+                const dayTitle = dayDiv.querySelector('.challengeDayTitle').value;
+                const dayDesc = dayDiv.querySelector('.challengeDayDesc').value;
+                const dayIcon = dayDiv.querySelector('.challengeDayIcon').value;
+
+                days.push({
+                    day: parseInt(dayNum),
+                    title: dayTitle,
+                    description: dayDesc,
+                    icon: dayIcon
+                });
+            });
+
+            // Sort days by day number
+            days.sort((a, b) => a.day - b.day);
+
+            const challenge = {
+                id: challengeId,
+                title,
+                description,
+                duration,
+                days
+            };
+
+            try {
+                const response = await fetch(`${ROOT}/api/admin/challenge/save`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ password: adminPassword, challenge })
+                });
+
+                if (response.ok) {
+                    closeChallengeModal();
+                    loadAdminChallenge();
+                } else {
+                    alert('Failed to save challenge');
+                }
+            } catch (error) {
+                console.error('Error saving challenge:', error);
+                alert('Error saving challenge');
+            }
+        });
+
+        async function deleteChallenge() {
+            if (!confirm('Are you sure you want to delete this challenge?')) return;
+
+            try {
+                const response = await fetch(`${ROOT}/api/admin/challenge/delete`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ password: adminPassword })
+                });
+
+                if (response.ok) {
+                    loadAdminChallenge();
+                } else {
+                    alert('Failed to delete challenge');
+                }
+            } catch (error) {
+                console.error('Error deleting challenge:', error);
+                alert('Error deleting challenge');
             }
         }
     </script>

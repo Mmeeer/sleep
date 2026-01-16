@@ -1,0 +1,70 @@
+{
+  "challenge": {
+    "id": "1",
+    "title": "10-Day Better Sleep Challenge",
+    "description": "Transform your sleep habits in just 10 days with our scientifically-backed daily challenges.",
+    "duration": "10 days",
+    "days": [
+      {
+        "day": 1,
+        "title": "Set Your Sleep Schedule",
+        "description": "Choose a consistent bedtime and wake time, even on weekends.",
+        "icon": "⏰"
+      },
+      {
+        "day": 2,
+        "title": "Create a Wind-Down Routine",
+        "description": "Develop a 30-minute pre-sleep routine to signal your body it's time to rest.",
+        "icon": "🌙"
+      },
+      {
+        "day": 3,
+        "title": "Optimize Your Environment",
+        "description": "Make your bedroom cool, dark, and quiet for optimal sleep conditions.",
+        "icon": "🛏️"
+      },
+      {
+        "day": 4,
+        "title": "Digital Detox",
+        "description": "No screens 1 hour before bed. Try reading or meditation instead.",
+        "icon": "📵"
+      },
+      {
+        "day": 5,
+        "title": "Morning Light Exposure",
+        "description": "Get 10-15 minutes of natural sunlight within an hour of waking.",
+        "icon": "☀️"
+      },
+      {
+        "day": 6,
+        "title": "Afternoon Energy Boost",
+        "description": "No caffeine after 2 PM. Switch to herbal tea or water.",
+        "icon": "☕"
+      },
+      {
+        "day": 7,
+        "title": "Evening Exercise",
+        "description": "Light stretching or yoga 2-3 hours before bed to release tension.",
+        "icon": "🧘"
+      },
+      {
+        "day": 8,
+        "title": "Mindful Eating",
+        "description": "Avoid heavy meals 3 hours before bed. Light snacks only if needed.",
+        "icon": "🥗"
+      },
+      {
+        "day": 9,
+        "title": "Stress Management",
+        "description": "Practice 10 minutes of deep breathing or journaling before bed.",
+        "icon": "📝"
+      },
+      {
+        "day": 10,
+        "title": "Celebrate Your Progress",
+        "description": "Reflect on your sleep improvements and commit to maintaining healthy habits.",
+        "icon": "🎉"
+      }
+    ]
+  }
+}
